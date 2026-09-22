@@ -1,5 +1,6 @@
-dependencias = {"Vuelos": ["Avion"], 
-                "Pasajeros": ["Equipaje"], 
-                "Tripulacion": ["Pilotos", "Azafatas"], 
-                "Aerolineas": ["IBERIA", "QATAR"],
-                "Avion": ["Boeing", "Airbus"]}
+dependencias = {"Vuelos":["Pasajeros", "Tripulacion", "Avion"],
+                "Pasajeros": ["Equipaje"],
+                "Equipaje": ["Seguiridad"], 
+                "Tripulacion": ["Pilotos", "Azafatas"],
+                "Avion": ["Mantenimiento", "Carburante"]}
+                
