@@ -1,4 +1,5 @@
-def insertion_sort(arr):
+def sort_array(arr):
+    arr = arr[:]
     for i in range(1, len(arr)):
         key = arr[i]
         j = i-1
@@ -11,5 +12,5 @@ def insertion_sort(arr):
 # Example usage:
 if __name__ == "__main__":
     sample_array = [12, 11, 13, 5, 6]
-    sorted_array = insertion_sort(sample_array)
+    sorted_array = sort_array(sample_array)
     print("Sorted array is:", sorted_array)

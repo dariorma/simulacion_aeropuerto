@@ -1,29 +1,31 @@
-numeros = [1, 2, 3, 4, 5]
-suma_total = 0
-
-for n in numeros:
-    suma_total += n
-
-print(suma_total) 
-
-
-
-
-
-def sumar_matrices(matriz_a, matriz_b):
+def matriz_sum(a, b):
     resultado = []
+
+    if len(a) != len(b):
+        raise ValueError("Las matrices no tiene el mismo tamaño")
+
+    if len({len(fila) for fila in a})>1:
+        raise ValueError("Las filas son desiguales")
+
+    if len({len(fila) for fila in b})>1:
+        raise ValueError("Las filas son desiguales")
+
+    if len(a[0]) != len(b[0]):
+        raise ValueError("el tamaño de las filas es distinto")
     
-    for i in range(len(matriz_a)):
+    for i in range(len(a)):
         fila_actual = []
-        for j in range(len(matriz_a[0])):
-            suma = matriz_a[i][j] + matriz_b[i][j]
+        for j in range(len(a[0])):
+            suma = a[i][j] + b[i][j]
             fila_actual.append(suma)
         resultado.append(fila_actual)
-        
     return resultado
 
-A = [[1, 2], [3, 4]]
-B = [[5, 6], [7, 8]]
-
-matriz_suma = sumar_matrices(A, B)
-print(matriz_suma) 
+def elementwise_array_sum(a,b):
+    res=[]
+    if len(a) != len(b):
+        raise ValueError("Tamanyo distinto")
+    for i in range(len(a)):
+        suma = a[i]+b[i]
+        res.append(suma)
+    return res
