@@ -135,30 +135,48 @@ def simular(grafo, horas_necesarias, operarios_por_tick, modalidad, max_ticks=10
 
 
 def simular_paso_a_paso(grafo, horas_necesarias, operarios_por_tick, modalidad, pausa=1, max_ticks=100):
-    """Igual que simular(), pero imprime cada tick y espera 'pausa' segundos entre uno y otro."""
+    """Igual que simular(), pero imprime cada tick de forma legible y espera 'pausa' segundos entre uno y otro."""
     horas_restantes = dict(horas_necesarias)
     completados = set()
     orden_grafo = list(grafo.keys())
+    total_tareas = len(grafo)
 
-    print(f"=== Simulacion paso a paso ({modalidad}) ===")
+    print("\n" + "=" * 60)
+    print(f" SIMULACION PASO A PASO  |  modalidad: {modalidad}")
+    print("=" * 60)
 
     tick = 0
-    while len(completados) < len(grafo) and tick < max_ticks:
+    while len(completados) < total_tareas and tick < max_ticks:
         tick += 1
         disponibles, reparto, completados_este_tick = un_paso(
             grafo, horas_restantes, completados, operarios_por_tick, modalidad, orden_grafo
         )
 
         print(f"\n--- Tick {tick} ---")
-        print("Disponibles:", disponibles)
-        print("Operarios repartidos:", reparto)
+        print("Disponibles ahora    :", ", ".join(disponibles) if disponibles else "(ninguna)")
+
+        if reparto:
+            texto_reparto = ", ".join(f"{nodo} +{horas}h" for nodo, horas in reparto.items())
+        else:
+            texto_reparto = "(sin operarios asignados)"
+        print("Operarios repartidos :", texto_reparto)
+
         if completados_este_tick:
-            print("Completadas en este tick:", completados_este_tick)
-        print("Horas restantes:", horas_restantes)
+            print("Completadas hoy      :", ", ".join(completados_este_tick))
+
+        print(f"Progreso total       : {len(completados)}/{total_tareas} tareas completadas")
+
+        pendientes = {nodo: horas for nodo, horas in horas_restantes.items() if horas > 0}
+        if pendientes:
+            print("Horas que faltan por tarea:")
+            for nodo, horas in pendientes.items():
+                print(f"   - {nodo:<15} {horas}h")
 
         time.sleep(pausa)
 
-    print(f"\n=== Fin: {len(completados)}/{len(grafo)} tareas completadas en {tick} ticks ===")
+    print("\n" + "=" * 60)
+    print(f" FIN: {len(completados)}/{total_tareas} tareas completadas en {tick} ticks")
+    print("=" * 60 + "\n")
     return completados
 
 
