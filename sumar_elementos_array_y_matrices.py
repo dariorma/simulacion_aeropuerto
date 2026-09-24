@@ -10,7 +10,7 @@ def matriz_sum(a, b):
     if len({len(fila) for fila in b})>1:
         raise ValueError("Las filas son desiguales")
 
-    if len(a[0]) != len(b[0]):
+    if a and len(a[0]) != len(b[0]):
         raise ValueError("el tamaño de las filas es distinto")
     
     for i in range(len(a)):
