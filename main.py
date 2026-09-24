@@ -58,4 +58,4 @@ for modalidad in ("equitativo", "prioridad", "secuencial"):
     print(f"simulador ({modalidad}): {len(historial)} ticks, {len(completados)}/{len(dependencias)} completados")
 
 #simulador paso a paso: mismo resultado que arriba, pero imprimiendo tick a tick con una pausa
-simular_paso_a_paso(dependencias, HORAS_NECESARIAS, operarios_por_tick=6, modalidad="equitativo", pausa=1)
+simular_paso_a_paso(dependencias, HORAS_NECESARIAS, operarios_por_tick=20, modalidad="equitativo", pausa=1)
