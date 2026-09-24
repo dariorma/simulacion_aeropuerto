@@ -3,6 +3,7 @@ from sumar_elementos_array_y_matrices import matriz_sum, elementwise_array_sum
 from sort_array import sort_array
 from project_cost import project_cost
 from create_tasks import create_tasks
+from simulador import simular, simular_paso_a_paso, HORAS_NECESARIAS
 
 #sort_array
 hora_salida=[14, 9, 22, 6, 18]
@@ -50,3 +51,11 @@ horas = {"Pilotos": 8, "Azafatas": 6, "Mantenimiento": 4}
 nombres_tareas = ["Pilotos", "Azafatas", "Mantenimiento"]
 cantidades_tareas = [2, 3, 1]
 print("create_tasks:", create_tasks(nombres_tareas, cantidades_tareas, horas))
+
+#simulador: paso del tiempo y reparto de operarios sobre el grafo de dependencias
+for modalidad in ("equitativo", "prioridad", "secuencial"):
+    historial, completados = simular(dependencias, HORAS_NECESARIAS, operarios_por_tick=6, modalidad=modalidad)
+    print(f"simulador ({modalidad}): {len(historial)} ticks, {len(completados)}/{len(dependencias)} completados")
+
+#simulador paso a paso: mismo resultado que arriba, pero imprimiendo tick a tick con una pausa
+simular_paso_a_paso(dependencias, HORAS_NECESARIAS, operarios_por_tick=6, modalidad="equitativo", pausa=1)
